@@ -18,7 +18,11 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/**/*'
     - '*.gemspec'
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
 RSpec/ExampleLength:
+  Enabled: false
+RSpec/FilePath:
   Enabled: false
 RSpec/MultipleExpectations:
   Enabled: false

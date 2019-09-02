@@ -7,7 +7,7 @@ RSpec.describe Rails::QueryGenerator, type: :generator do
 
   before do
     prepare_destination
-    run_generator(%w(v1/users/age))
+    run_generator(%w[v1/users/age])
   end
 
   let(:sample_path) { 'spec/generators/tmp/app/queries/v1/users/age_query.rb' }

@@ -39,21 +39,21 @@ RSpec.describe Lite::Query::Base do
   describe '.execute' do
     it 'to be default_relation SQL string' do
       query = OlderThanAgeQuery.new
-      sql = "SELECT \"users\".* FROM \"users\""
+      sql = 'SELECT "users".* FROM "users"'
 
       expect(query.execute.to_sql).to eq(sql)
     end
 
     it 'to be custom relation SQL string' do
       query = OlderThanAgeQuery.new(User.limit(1))
-      sql = "SELECT \"users\".* FROM \"users\" LIMIT 1"
+      sql = 'SELECT "users".* FROM "users" LIMIT 1'
 
       expect(query.execute.to_sql).to eq(sql)
     end
 
     it 'to be scoped SQL string' do
       query = OlderThanAgeQuery.new(age: 10)
-      sql = "SELECT \"users\".* FROM \"users\" WHERE (age > 10)"
+      sql = 'SELECT "users".* FROM "users" WHERE (age > 10)'
 
       expect(query.execute.to_sql).to eq(sql)
     end
