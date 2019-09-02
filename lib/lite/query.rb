@@ -1,8 +1,11 @@
-require "lite/query/version"
+# frozen_string_literal: true
 
-module Lite
-  module Query
-    class Error < StandardError; end
-    # Your code goes here...
-  end
+%w[version exceptions base].each do |name|
+  require "lite/query/#{name}"
+end
+
+require 'generators/lite/query/install_generator'
+
+%w[rails rspec test_unit].each do |name|
+  require "generators/#{name}/query_generator"
 end

@@ -1,0 +1,8 @@
+Description:
+    Generate a query file
+
+Example:
+    rails generate query NAME
+
+    This will create:
+        - app/queries/[name]_query.rb

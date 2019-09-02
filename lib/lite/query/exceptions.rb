@@ -3,7 +3,7 @@
 module Lite
   module Query
 
-    VERSION ||= '1.0.0'
+    class NotImplementedError < StandardError; end
 
   end
 end

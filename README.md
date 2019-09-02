@@ -1,8 +1,10 @@
 # Lite::Query
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/lite/query`. To experiment with that code, run `bin/console` for an interactive prompt.
+[![Gem Version](https://badge.fury.io/rb/lite-query.svg)](http://badge.fury.io/rb/lite-query)
+[![Build Status](https://travis-ci.org/drexed/lite-query.svg?branch=master)](https://travis-ci.org/drexed/lite-query)
 
-TODO: Delete this and the text above, and describe your gem
+Lite::Query is a library for using the query pattern to separate complex query
+logic from classes such as controllers and models.
 
 ## Installation
 
@@ -20,9 +22,65 @@ Or install it yourself as:
 
     $ gem install lite-query
 
+## Table of Contents
+
+* [Setup](#setup)
+* [Usage](#usage)
+
+## Setup
+
+`rails g lite:query:install` will generate the following file:
+`../app/queries/application_query.rb`
+
+```ruby
+class ApplicationQuery < Lite::Query::Base
+end
+```
+
+Use `rails g query NAME` will generate the following file: `../app/queries/[name]_query.rb`
+
+*(This will also add available test framework files if detected)*
+
+You will then need to fill this class with the required `execute` method
+
+```ruby
+class AgeQuery < ApplicationQuery
+
+  # NOTE: this method is required
+  def execute
+    return relation unless args[:age]
+
+    relation.where('age > ?', args[:age])
+  end
+
+  private
+
+  def default_relation
+    User.all
+  end
+
+end
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+There are multiple ways to access the query call:
+
+```ruby
+relation = User.limit(1)
+
+query = AgeQuery.new(relation)
+query.call
+
+# - or -
+
+query = AgeQuery.new(age: 10)
+query.exectue
+
+# - or -
+
+AgeQuery.call(relation, age: 20)
+```
 
 ## Development
 
