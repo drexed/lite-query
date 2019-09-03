@@ -37,14 +37,15 @@ class ApplicationQuery < Lite::Query::Base
 end
 ```
 
-Use `rails g query NAME` will generate the following file: `../app/queries/[name]_query.rb`
+Use `rails g query NAME` will generate the following file:
+`../app/queries/[name]_query.rb`
 
 You will then need to fill this class with the required `execute` method as shown below:
 
 ```ruby
 class AgeQuery < ApplicationQuery
 
-  # NOTE: this method is required
+  # NOTE: This instance method is required
   def execute
     return relation unless args[:age]
 
