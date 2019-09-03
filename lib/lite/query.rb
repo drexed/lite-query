@@ -5,7 +5,4 @@
 end
 
 require 'generators/lite/query/install_generator'
-
-%w[rails rspec test_unit].each do |name|
-  require "generators/#{name}/query_generator"
-end
+require 'generators/rails/query_generator'
