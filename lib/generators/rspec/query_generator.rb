@@ -8,7 +8,7 @@ module Rspec
 
       source_root File.expand_path('../templates', __FILE__)
 
-      def create_test_file
+      def copy_files
         path = File.join('spec', 'queries', class_path, "#{file_name}_query_spec.rb")
         empty_directory('spec/queries')
         template('query_spec.rb.tt', path)
