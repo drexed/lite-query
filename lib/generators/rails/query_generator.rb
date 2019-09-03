@@ -15,8 +15,6 @@ module Rails
     end
 
     def copy_specs
-      return unless defined?(RSpec)
-
       path = File.join('spec', 'queries', class_path, "#{file_name}_query_spec.rb")
       empty_directory('spec/queries')
       template('spec.rb.tt', path)
