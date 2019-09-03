@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe RSpec::Generators::QueryGenerator, type: :generator do
+RSpec.describe Rspec::Generators::QueryGenerator, type: :generator do
   destination(File.expand_path('../../tmp', __FILE__))
 
   before do

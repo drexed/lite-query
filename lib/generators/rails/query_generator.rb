@@ -7,12 +7,13 @@ module Rails
 
     source_root File.expand_path('../templates', __FILE__)
     check_class_collision suffix: 'Query'
-    hook_for :test_framework
 
     def create_query
       path = File.join('app', 'queries', class_path, "#{file_name}_query.rb")
       template('query.rb.tt', path)
     end
+
+    hook_for :test_framework
 
     private
 

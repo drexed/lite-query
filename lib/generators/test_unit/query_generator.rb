@@ -11,6 +11,7 @@ module TestUnit
 
       def create_test_file
         path = File.join('test', 'queries', class_path, "#{file_name}_query_test.rb")
+        empty_directory('test/queries')
         template('query_test.rb.tt', path)
       end
 
