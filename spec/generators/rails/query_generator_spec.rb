@@ -10,17 +10,34 @@ RSpec.describe Rails::QueryGenerator, type: :generator do
     run_generator(%w[v1/users/age])
   end
 
-  let(:sample_path) { 'spec/generators/tmp/app/queries/v1/users/age_query.rb' }
+  let(:query_path) { 'spec/generators/tmp/app/queries/v1/users/age_query.rb' }
+  let(:rspec_path) { 'spec/generators/tmp/spec/queries/v1/users/age_query_spec.rb' }
 
   describe '#generator' do
-    it 'to be true when sample file exists' do
-      expect(File.exist?(sample_path)).to eq(true)
+    context 'when generating app files' do
+      it 'to be true when query file exists' do
+        expect(File.exist?(query_path)).to eq(true)
+      end
+
+      it 'to include the proper markup' do
+        query_file = File.read(query_path)
+        text_snippet = 'class V1::Users::AgeQuery < ApplicationQuery'
+
+        expect(query_file.include?(text_snippet)).to eq(true)
+      end
     end
 
-    it 'to include the proper markup' do
-      sample_file = File.read(sample_path)
+    context 'when generating spec files' do
+      it 'to be true when query file exists' do
+        expect(File.exist?(rspec_path)).to eq(true)
+      end
 
-      expect(sample_file.include?('class V1::Users::AgeQuery < ApplicationQuery')).to eq(true)
+      it 'to include the proper markup' do
+        rspec_file = File.read(rspec_path)
+        text_snippet = 'V1::Users::AgeQuery, type: :query'
+
+        expect(rspec_file.include?(text_snippet)).to eq(true)
+      end
     end
   end
 
