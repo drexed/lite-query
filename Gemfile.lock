@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lite-query (1.0.4)
+    lite-query (1.0.5)
 
 GEM
   remote: https://rubygems.org/
