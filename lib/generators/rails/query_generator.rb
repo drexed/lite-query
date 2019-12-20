@@ -14,12 +14,6 @@ module Rails
       template('query.rb.tt', path)
     end
 
-    def copy_specs
-      path = File.join('spec', 'queries', class_path, "#{file_name}_query_spec.rb")
-      empty_directory('spec/queries')
-      template('spec.rb.tt', path)
-    end
-
     private
 
     def file_name

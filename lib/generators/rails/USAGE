@@ -6,4 +6,3 @@ Example:
 
     This will create:
         - app/queries/[name]_query.rb
-        - spec/queries/[name]_query_spec.rb

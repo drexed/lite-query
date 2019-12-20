@@ -29,18 +29,21 @@ Or install it yourself as:
 
 ## Setup
 
-`rails g lite:query:install` will generate the following file:
-`../app/queries/application_query.rb`
+### Generators
 
-```ruby
-class ApplicationQuery < Lite::Query::Base
-end
+Use `rails g query NAME` will generate the following files:
+
+```erb
+app/queries/[name]_query.rb
 ```
 
-Use `rails g query NAME` will generate the following file:
-`../app/queries/[name]_query.rb`
+If a `ApplicationQuery` file in the `app/queries` directory is available, the
+generator will create file that inherit from `ApplicationQuery` if not it will
+fallback to `Lite::Query::Base`.
 
-You will then need to fill this class with the required `execute` method as shown below:
+### Query
+
+You will need to fill this class with the required `execute` method as shown below:
 
 ```ruby
 class AgeQuery < ApplicationQuery

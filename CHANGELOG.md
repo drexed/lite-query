@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.6] - 2019-12-20
+### Removed
+- Removed lite-query generator
+- Removed spec from rails generator
+
 ## [1.0.5] - 2019-09-02
 ### Changed
 - Changed generator syntax
