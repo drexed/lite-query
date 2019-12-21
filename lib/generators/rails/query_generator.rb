@@ -10,7 +10,6 @@ module Rails
 
     def copy_files
       path = File.join('app', 'queries', class_path, "#{file_name}_query.rb")
-      empty_directory('app/queries')
       template('query.rb.tt', path)
     end
 
