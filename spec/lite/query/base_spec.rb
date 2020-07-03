@@ -52,7 +52,7 @@ RSpec.describe Lite::Query::Base do
     end
 
     it 'to be scoped SQL string' do
-      query = OlderThanAgeQuery.new(age: 10)
+      query = OlderThanAgeQuery.new(nil, age: 10)
       sql = 'SELECT "users".* FROM "users" WHERE (age > 10)'
 
       expect(query.execute.to_sql).to eq(sql)

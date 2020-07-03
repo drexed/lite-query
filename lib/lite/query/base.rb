@@ -9,14 +9,14 @@ module Lite
 
       class << self
 
-        def call(relation = nil, **args)
+        def call(relation = nil, args = {})
           klass = new(relation, args)
           klass.call
         end
 
       end
 
-      def initialize(relation = nil, **args)
+      def initialize(relation = nil, args = {})
         @relation = relation || default_relation
         @args = args
       end
