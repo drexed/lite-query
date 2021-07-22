@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'rails/generators'
-
 module Rails
   class QueryGenerator < Rails::Generators::NamedBase
 
