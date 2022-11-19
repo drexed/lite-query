@@ -29,36 +29,29 @@ Or install it yourself as:
 
 ## Setup
 
-### Generators
+#### Generators
 
-Use `rails g query NAME` will generate the following files:
+`rails g query NAME` will generate the following file in your application root:
 
 ```erb
-app/queries/[name]_query.rb
+app/queries/[NAME]_query.rb
 ```
 
 If a `ApplicationQuery` file in the `app/queries` directory is available, the
 generator will create file that inherit from `ApplicationQuery` if not it will
 fallback to `Lite::Query::Base`.
 
-### Query
+#### Query
 
-You will need to fill this class with the required `execute` method as shown below:
+You will need to fill this class with the required `call` method as shown below:
 
 ```ruby
-class AgeQuery < ApplicationQuery
+class AgeQuery < Lite::Query::Base
 
-  # NOTE: This instance method is required
-  def execute
+  def call
     return relation unless args[:age]
 
     relation.where('age > ?', args[:age])
-  end
-
-  private
-
-  def default_relation
-    User.all
   end
 
 end
@@ -68,20 +61,25 @@ end
 
 There are multiple ways to access the query call:
 
+#### Instance
 ```ruby
 relation = User.limit(1)
+query = AgeQuery.new(relation, age: 10)
+query.call #=> SELECT * FROM users WHERE age = 10 LIMIT 1
+```
 
-query = AgeQuery.new(relation)
-query.call
+#### Class
+```ruby
+AgeQuery.call(User, age: 20) #=> SELECT * FROM users WHERE age = 10
+```
 
-# - or -
+#### Scope
+```ruby
+class User < ApplicationRecord
 
-query = AgeQuery.new(age: 10)
-query.exectue
+  scope :min_age, ->(age) { MinAgeQuery.new(self, age: age) }
 
-# - or -
-
-AgeQuery.call(relation, age: 20)
+end
 ```
 
 ## Development
@@ -92,7 +90,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/lite-query. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/drexed/lite-query. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -100,4 +98,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Lite::Query project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/lite-query/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Lite::Query project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/drexed/lite-query/blob/master/CODE_OF_CONDUCT.md).

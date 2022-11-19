@@ -7,6 +7,11 @@ module Lite
       attr_accessor :relation
       attr_reader :args
 
+      def initialize(relation = nil, args = {})
+        @relation = relation
+        @args = args
+      end
+
       class << self
 
         def call(relation = nil, args = {})
@@ -16,21 +21,8 @@ module Lite
 
       end
 
-      def initialize(relation = nil, args = {})
-        @relation = relation || default_relation
-        @args = args
-      end
-
       def call
-        raise Lite::Query::NotImplementedError unless defined?(execute)
-
-        execute
-      end
-
-      private
-
-      def default_relation
-        nil
+        raise NotImplementedError
       end
 
     end
